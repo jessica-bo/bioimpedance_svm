@@ -15,17 +15,18 @@ class Plotter():
     def versiontuple(v):
         return tuple(map(int, (v.split("."))))
     
-    def plot_points(X,y):
+    def plot_points(X, y, var1, var2):
         fig, ax = plt.subplots()
         colors = {1:'red', 0:'blue'}
-        ax.scatter(X['Frequency'], X['Impedance'], c=y['Blood?'].apply(lambda x: colors[x]))
+        ax.scatter(X[var1], X[var2], c=y['Blood?'].apply(lambda x: colors[x]))
+#        ax.set_yscale('log')
         plt.tight_layout()
-        plt.title("Impedance vs. Frequency")
+        plt.title("Imag vs. Real")
         plt.savefig('data.png')
         plt.show()
     
     #TODO fix this 
-    def plot_decision_regions(X, y, classifier, test_idx=None, resolution=100):
+    def plot_decision_regions(X, y, classifier, var1, var2, resolution=100, test_idx=None):
         
         # setup marker generator and color map
 #        markers = ('s', 'x', 'o', '^', 'v')
@@ -34,18 +35,20 @@ class Plotter():
         cmap = ListedColormap(colors[:len(np.unique(y))])
     
         # plot the decision surface
-        x1_min, x1_max = X['Frequency'].min() - 1, X['Frequency'].max() + 1
-        x2_min, x2_max = X['Impedance'].min() - 1, X['Impedance'].max() + 1
+        x1_min, x1_max = X[var1].min() - 1, X[var1].max() + 1
+        x2_min, x2_max = X[var2].min() - 1, X[var2].max() + 1
         xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, (x1_max-x1_min)/5000), 
                                np.arange(x2_min, x2_max, (x2_max-x2_min)/5000))
         Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
         Z = Z.reshape(xx1.shape)
         
+        fig = plt.figure()
+        ax = plt.gca()
         plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
         plt.xlim(xx1.min(), xx1.max())
         plt.ylim(xx2.min(), xx2.max())
         
-        plt.scatter(X['Frequency'], X['Impedance'], c=y['Blood?'].apply(lambda x: y_colors[x]))
+        plt.scatter(X[var1], X[var2], c=y['Blood?'].apply(lambda x: y_colors[x]))
     
 #        colors = {1:'red', 0:'blue'}
 #        
@@ -72,6 +75,7 @@ class Plotter():
                         s=55, label='test set')
             
         plt.title("SVM Decision Boundary")
+#        ax.set_yscale('log')
         plt.tight_layout()
         plt.savefig('svm.png')
         plt.show()

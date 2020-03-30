@@ -31,17 +31,17 @@ if __name__ == "__main__":
     #   y = binary labels
     X, y = MakeData.make_data(n_samples=200, noise = 0.3, random_state=None)
 
-    X = pandas.read_csv("X.csv", delimiter=',')
-    y = pandas.read_csv("y.csv", delimiter=',')
+    X = pandas.read_csv("X_animal_blood_fat.csv", delimiter=',')
+    y = pandas.read_csv("y_animal_blood_fat.csv", delimiter=',')
 
-    Plotter.plot_points(X, y)
+    Plotter.plot_points(X, y, var1='Real', var2='Imag')
     
     # Split dataset into training and testing
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,random_state=109, shuffle=True)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5,random_state=49, shuffle=True)
 
     # Create a SVC classifier using an RBG kernel
     svm = SVC(kernel='linear')
-    #svm = SVC(kernel='rbf', C=10, random_state=0, gamma=0.1)
+#    svm = SVC(kernel='rbf', C=10, random_state=109, gamma=0.1)
     svm.fit(X_train, y_train)
 
     # Test model predictions
@@ -56,5 +56,5 @@ if __name__ == "__main__":
 
     # Visualize the decision boundaries
     #TODO fix this
-    Plotter.plot_decision_regions(X_train, y_train, classifier=svm)
+    Plotter.plot_decision_regions(X_train, y_train, classifier=svm, var1='Real', var2='Imag')
     
