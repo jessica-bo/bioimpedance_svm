@@ -6,21 +6,19 @@ Created on Fri Jan 24 14:13:50 2020
 """
 
 import pandas
-
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
-
 from svm_plotter import Plotter
 from data_generator import MakeData
 
 
 if __name__ == "__main__":
 
-    # Generate inverted semi-circle data, then scaling and flipping
+    # Method to generate inverted semi-circle data, then scaling and flipping
     #   X = real and imaginary impedance readings
     #   y = binary labels
-    X, y = MakeData.make_data(n_samples=200, noise = 0.3, random_state=None)
+#    X, y = MakeData.make_data(n_samples=200, noise = 0.3, random_state=None)
 
     X = pandas.read_csv("X_animal_blood_fat.csv", delimiter=',')
     y = pandas.read_csv("y_animal_blood_fat.csv", delimiter=',')
@@ -46,6 +44,5 @@ if __name__ == "__main__":
     print("Recall:", metrics.recall_score(y_test, y_pred))
 
     # Visualize the decision boundaries
-    #TODO fix this
     Plotter.plot_decision_regions(X_train, y_train, classifier=svm, var1='Real', var2='Imag')
     
