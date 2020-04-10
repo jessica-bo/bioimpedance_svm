@@ -2,9 +2,9 @@
 """
 Created on Fri Jan 24 13:45:06 2020
 
-@author: jessi
+@author: jessicabo
 """
-# Import packages to visualize the classifer
+
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import warnings
@@ -26,9 +26,7 @@ class Plotter():
         plt.show()
 
     def plot_decision_regions(X, y, classifier, var1, var2, resolution=100, test_idx=None):
-        
         # setup marker generator and color map
-#        markers = ('s', 'x', 'o', '^', 'v')
         colors = ('blue', 'red','lightgreen', 'gray', 'cyan')
         y_colors = {1:'red', 0:'blue'}
         cmap = ListedColormap(colors[:len(np.unique(y))])
@@ -49,13 +47,6 @@ class Plotter():
         
         plt.scatter(X[var1], X[var2], c=y['Blood?'].apply(lambda x: y_colors[x]))
     
-#        colors = {1:'red', 0:'blue'}
-#        
-#        for idx, cl in enumerate(np.unique(y)):
-#            plt.scatter(x=X['Frequency'], y=X['Impedance'],
-#                        alpha=0.8, c=cmap(idx),
-#                        marker=markers[idx], label=cl)
-    
         # highlight test samples
         if test_idx:
             # plot all samples
@@ -65,13 +56,8 @@ class Plotter():
             else:
                 X_test, y_test = X[test_idx, :], y[test_idx]
     
-            plt.scatter(X_test[:, 0],
-                        X_test[:, 1],
-                        c='',
-                        alpha=1.0,
-                        linewidths=1,
-                        marker='o',
-                        s=55, label='test set')
+            plt.scatter(X_test[:, 0],X_test[:, 1],c='',alpha=1.0,linewidths=1,
+                        marker='o',s=55, label='test set')
             
         plt.title("SVM Decision Boundary")
 #        ax.set_yscale('log')
