@@ -24,8 +24,7 @@ class Plotter():
         plt.title("Imag vs. Real")
         plt.savefig('data.png')
         plt.show()
-    
-    #TODO fix this 
+
     def plot_decision_regions(X, y, classifier, var1, var2, resolution=100, test_idx=None):
         
         # setup marker generator and color map

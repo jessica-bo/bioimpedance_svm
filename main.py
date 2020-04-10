@@ -2,18 +2,10 @@
 """
 Created on Fri Jan 24 14:13:50 2020
 
-@author: jessi
+@author: jessicabo
 """
 
-# IMPORTED LIBRARIES
-
-import os
-import datetime, time
-import sys
-
 import pandas
-import numpy as np
-import matplotlib.pyplot as plt
 
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
@@ -22,7 +14,6 @@ from sklearn import metrics
 from svm_plotter import Plotter
 from data_generator import MakeData
 
-# MAIN PROGRAM
 
 if __name__ == "__main__":
 
