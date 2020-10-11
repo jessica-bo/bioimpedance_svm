@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from svm_plotter import Plotter
 from data_generator import MakeData
+from sklearn.preprocessing import StandardScaler
 
 if __name__ == "__main__":
 
@@ -18,8 +19,11 @@ if __name__ == "__main__":
     #   X, y = MakeData.make_data(n_samples=200, noise = 0.3, random_state=None)
 
     #Import actual data from csv
-    X = pandas.read_csv("X_animal_blood_fat.csv", delimiter=',')
-    y = pandas.read_csv("y_animal_blood_fat.csv", delimiter=',')
+    X = pandas.read_csv("Data\X_animal_blood_fat.csv", delimiter=',')
+    y = pandas.read_csv("Data\y_animal_blood_fat.csv", delimiter=',')
+
+    scaler = StandardScaler() 
+    X[['Real', 'Imag']] = scaler.fit_transform(X[['Real', 'Imag']])
 
     Plotter.plot_points(X, y, var1='Real', var2='Imag')
     

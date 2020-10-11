@@ -21,7 +21,9 @@ class Plotter():
         ax.scatter(X[var1], X[var2], c=y['Blood?'].apply(lambda x: colors[x]))
 #        ax.set_yscale('log')
         plt.tight_layout()
-        plt.title("Imag vs. Real")
+        plt.title("Impedance Data", fontname="Arial",)
+        plt.xlabel("Real Impedance (normalized)", fontname="Arial",)
+        plt.ylabel("Imaginary Impedance (normalized)", fontname="Arial",)
         plt.savefig('data.png')
         plt.show()
 
@@ -59,7 +61,9 @@ class Plotter():
             plt.scatter(X_test[:, 0],X_test[:, 1],c='',alpha=1.0,linewidths=1,
                         marker='o',s=55, label='test set')
             
-        plt.title("SVM Decision Boundary")
+        plt.title("SVM Decision Boundary", fontname="Arial",)
+        plt.xlabel("Real Impedance (normalized)", fontname="Arial",)
+        plt.ylabel("Imaginary Impedance (normalized)", fontname="Arial",)
 #        ax.set_yscale('log')
         plt.tight_layout()
         plt.savefig('svm.png')
